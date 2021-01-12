@@ -4,36 +4,36 @@
 <div class="row">
 	<div class="col-sm-6">
 		<h1 class="monospace">
-			{{ artist.name }}
+			{{ artist['artist'].name }}
 		</h1>
-		<a href="/artists/{{ artist.id }}/edit"><button class="btn btn-primary btn-sm">Edit</button></a>
-		<a href="/artists/{{ artist.id }}/availability"><button class="btn btn-success btn-sm">Availability</button></a>
+		<a href="/artists/{{ artist['artist'].id }}/edit"><button class="btn btn-primary btn-sm">Edit</button></a>
+		<a href="/artists/{{ artist['artist'].id }}/availability"><button class="btn btn-success btn-sm">Availability</button></a>
 
 		<p class="subtitle">
-			ID: {{ artist.id }}
+			ID: {{ artist['artist'].id }}
 		</p>
 		<div class="genres">
-			{% for genre in artist.genres %}
+			{% for genre in artist['artist'].genres %}
 			<span class="genre">{{ genre }}</span>
 			{% endfor %}
 		</div>
 		<p>
-			<i class="fas fa-globe-americas"></i> {{ artist.city }}, {{ artist.state }}
+			<i class="fas fa-globe-americas"></i> {{ artist['artist'].city }}, {{ artist['artist'].state }}
 		</p>
 		<p>
-			<i class="fas fa-phone-alt"></i> {% if artist.phone %}{{ artist.phone }}{% else %}No Phone{% endif %}
+			<i class="fas fa-phone-alt"></i> {% if artist['artist'].phone %}{{ artist['artist'].phone }}{% else %}No Phone{% endif %}
         </p>
         <p>
-			<i class="fas fa-link"></i> {% if artist.website %}<a href="{{ artist.website }}" target="_blank">{{ artist.website }}</a>{% else %}No Website{% endif %}
+			<i class="fas fa-link"></i> {% if artist['artist'].website %}<a href="{{ artist.website }}" target="_blank">{{ artist['artist'].website }}</a>{% else %}No Website{% endif %}
 		</p>
 		<p>
-			<i class="fab fa-facebook-f"></i> {% if artist.facebook_link %}<a href="{{ artist.facebook_link }}" target="_blank">{{ artist.facebook_link }}</a>{% else %}No Facebook Link{% endif %}
+			<i class="fab fa-facebook-f"></i> {% if artist['artist'].facebook_link %}<a href="{{ artist.facebook_link }}" target="_blank">{{ artist['artist'].facebook_link }}</a>{% else %}No Facebook Link{% endif %}
         </p>
-		{% if artist.seeking_venue %}
+		{% if artist['artist'].seeking_venue %}
 		<div class="seeking">
 			<p class="lead">Currently seeking performance venues</p>
 			<div class="description">
-				<i class="fas fa-quote-left"></i> {{ artist.seeking_description }} <i class="fas fa-quote-right"></i>
+				<i class="fas fa-quote-left"></i> {{ artist['artist'].seeking_description }} <i class="fas fa-quote-right"></i>
 			</div>
 		</div>
 		{% else %}
@@ -42,11 +42,11 @@
 		</p>
 		{% endif %}
 
-	{% if artist.availabilities %}
+	{% if artist['artist'].availabilities %}
 	<br>
 		<h5 style="color:blue;">Availability time slots</h5>
 			<div class="col-sm-6">
-				{% for available in artist.availabilities %}
+				{% for available in artist['artist'].availabilities %}
 					<p><strong>From</strong> {{ available.start_time.strftime('%H:%M') }} <strong>to</strong> {{ available.end_time.strftime('%H:%M') }}</p>
 				{% endfor %}
 			</div>
@@ -54,14 +54,14 @@
 
 	</div>
 	<div class="col-sm-6">
-		<img src="{{ artist.image_link }}" alt="Artist Image" />
+		<img src="{{ artist['artist'].image_link }}" alt="Artist Image" />
 	</div>
 </div>
 
 <section>
-	<h2 class="monospace">{{ artist.upcoming_shows_count }} Upcoming {% if artist.upcoming_shows_count == 1 %}Show{% else %}Shows{% endif %}</h2>
+	<h2 class="monospace">{{ artist['artist'].upcoming_shows_count }} Upcoming {% if artist['artist'].upcoming_shows_count == 1 %}Show{% else %}Shows{% endif %}</h2>
 	<div class="row">
-		{% for show in artist.upcoming_shows %}
+		{% for show in artist['artist'].upcoming_shows %}
 		<div class="col-sm-4">
 			<div class="tile tile-show">
 				<img src="{{ show.venue_image_link }}" alt="Show Venue Image" />
@@ -73,9 +73,9 @@
 	</div>
 </section>
 <section>
-	<h2 class="monospace">{{ artist.past_shows_count }} Past {% if artist.past_shows_count == 1 %}Show{% else %}Shows{% endif %}</h2>
+	<h2 class="monospace">{{ artist['artist'].past_shows_count }} Past {% if artist['artist'].past_shows_count == 1 %}Show{% else %}Shows{% endif %}</h2>
 	<div class="row">
-		{% for show in artist.past_shows %}
+		{% for show in artist['artist'].past_shows %}
 		<div class="col-sm-4">
 			<div class="tile tile-show">
 				<img src="{{ show.venue_image_link }}" alt="Show Venue Image" />
