@@ -1,0 +1,25 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Fyyur | Venues{% endblock %}
+{% block content %}
+{% for area in areas %}
+<h3>{{ area.city }}, {{ area.state }}</h3>
+	<ul class="items">
+		{% if area.venues %}
+			{% for venue in area.venues %}
+				<li>
+					<a href="/venues/{{ venue.id }}">
+						<i class="fas fa-music"></i>
+						<div class="item">
+							<h5>{{ venue.name }}</h5>
+						</div>
+					</a>
+				</li>
+			{% endfor %}
+		{% else %}
+			<span>No venues.</span>
+		{% endif %}
+	</ul>
+{% endfor %}
+<br></br>
+<a href="/venues/create"><button class="btn btn-default btn-lg">Post a venue</button></a>
+{% endblock %}
